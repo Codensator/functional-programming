@@ -5,28 +5,41 @@ import java.util.function.Consumer;
 public class Main {
 
     public static void main(String[] args) {
-// um send() auszuführen, muss extra eine Klasse mit der entsprechenden Methode und ein Objekt der Klasse erstellt werden.
+/**     03 - OOP
+ *      um send() auszuführen, muss extra eine Klasse mit der entsprechenden Methode und ein Objekt der Klasse erstellt werden.
+ */
 /*
         EmailSender emailSender = new Gmail();
         emailSender.send();
- */
+*/
 
-// Das ist eine effizientere Variante um send() auszuführen, weil dafür nur der unten stehende Code gebraucht wird.
-// IntellJ gibt sogar den Hinweis: Anonymous new EmailSender() can be replaced with lambda
-/*        
+/**     04 - @FunctionalInterface
+ *      Das ist eine effizientere Variante um send() auszuführen, weil dafür nur der unten stehende Code gebraucht wird.
+ *      IntellJ gibt sogar den Hinweis: Anonymous new EmailSender() can be replaced with lambda
+ */
+/*
         EmailSender amigosCodeSender = new EmailSender(){
             @Override
             public void send() {
                 System.out.println("sending E-Mail using Amigoscode Server");
             }
-        }; 
+        };
  */
-// Das ist die Variante von amigoScodeSender, die noch effizienter ist, weil Sie Lambda nutzt und damit nochmal weniger Code braucht.
-// Wenn nur eine function nach dem = kommt, dann können die {}-Klammern weggelassen werden.
-        EmailSender amigoCodeSender =
-                () -> System.out.println("sending E-Mail using Amigoscode Server");
+/**     04 - @FunctionalInterface
+ *      Das ist die Variante von amigosCodeSender, die noch effizienter ist, weil Sie Lambda nutzt und damit nochmal weniger Code braucht.
+ *      Wenn nur eine function nach dem = kommt, dann können die {}-Klammern weggelassen werden.
+ *      Das -> ist nur dann ein Lambda, wenn sich nur eine Methode im Interface befindet (hier EmailSender).
+ *      Die Funktion würde nicht mehr funktionieren, wenn das Interface eine zweite Methode hätte.
+ */
 
-        amigoCodeSender.send();
+        EmailSender amigosCodeSender = () -> System.out.println("sending E-Mail using " + "Amigoscode Server");
+        amigosCodeSender.send();
+
+        EmailSender gmail = () -> System.out.println("Sending E-Mail using Gmail");
+        gmail.send();
+
+        EmailSender hotmail = () -> System.out.println("Sending E-Mail using Hotmail");
+        hotmail.send();
 
 
 
