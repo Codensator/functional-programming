@@ -1,8 +1,8 @@
 /**     03 - OOP
- *
+ *      in 05 - Working with Lambdas ausgeklammert
  */
 
-
+/*
 package com.amigoscode;
 
 public class Hotmail implements EmailSender
@@ -13,3 +13,4 @@ public class Hotmail implements EmailSender
 
     }
 }
+*/

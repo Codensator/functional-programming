@@ -27,19 +27,35 @@ public class Main {
  */
 /**     04 - @FunctionalInterface
  *      Das ist die Variante von amigosCodeSender, die noch effizienter ist, weil Sie Lambda nutzt und damit nochmal weniger Code braucht.
- *      Wenn nur eine function nach dem = kommt, dann können die {}-Klammern weggelassen werden.
+ *      Wenn nur ein Statement bzw. nur eine Zeile Code nach dem = kommt, dann können die {}-Klammern weggelassen werden.
  *      Das -> ist nur dann ein Lambda, wenn sich nur eine Methode im Interface befindet (hier EmailSender).
  *      Die Funktion würde nicht mehr funktionieren, wenn das Interface eine zweite Methode hätte.
  */
 
-        EmailSender amigosCodeSender = () -> System.out.println("sending E-Mail using " + "Amigoscode Server");
-        amigosCodeSender.send();
+/**     05 - Working with Lambdas
+ *      Da die send()-Methode im Interface EmailSender um den String email ergänzt wurde, müssen die functions ebenfalls um einen String email ergänzt werden.
+ *      Wenn nur ein Argument an die Funktion übergeben wird, dann muss es nicht in ()-Klammern gesetzt werden.
+ *      Hier gibt es zwei Argumente (from, to) und daher ist die Klammer notwendig.
+ */
+        EmailSender amigosCodeSender = (from, to) -> {
+            System.out.println("sending E-Mail using " + "Amigoscode Server");
+            return false; // weil die send()-Methode im Interface von void in boolean geändert wurde, muss beim call ein Wert returned werden.
+        };
+        amigosCodeSender.send("hello@amigosCode.com","alex@gmail.com");
 
-        EmailSender gmail = () -> System.out.println("Sending E-Mail using Gmail");
-        gmail.send();
+        EmailSender gmail = (from, to) -> {
+            System.out.println("Sending E-Mail using Gmail");
+            return false;
+        };
 
-        EmailSender hotmail = () -> System.out.println("Sending E-Mail using Hotmail");
-        hotmail.send();
+        EmailSender hotmail = (from, to) -> {
+            boolean isValid = to.contains("@"); // var isValid: boolean isValid = email.contains("@"); // der original Code aus 05 - Working with Lambdas, der bei mir aber mehrere Fehler verursacht hat.
+            System.out.println("Sending E-Mail using Hotmail");
+            return true;
+        };
+
+        boolean wasEmailSent = gmail.send("hello@amigosCode.com","alex@gmail.com");
+        hotmail.send("hello@amigosCode.com", "jamila@gmail.com");
 
 
 

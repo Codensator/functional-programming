@@ -13,6 +13,7 @@ package com.amigoscode;
 @FunctionalInterface // 04 - @FunctionalInterface
 public interface EmailSender
 {
-    void send();
+    //void send(); // 03 - OOP
+    boolean send(String from, String to); // 5 - Working with Lambdas
     //void unSend(); // 04 - @FunctionalInterface
 }
