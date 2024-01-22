@@ -1,5 +1,6 @@
 package com.amigoscode;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class Main {
@@ -56,6 +57,28 @@ public class Main {
 
         boolean wasEmailSent = gmail.send("hello@amigosCode.com","alex@gmail.com");
         hotmail.send("hello@amigosCode.com", "jamila@gmail.com");
+
+/**     06 - forEach
+ *      forEach mit Consumer
+ */
+        //Ausgabe aller Namen im Array mit for-each-Schleife
+ /*     String [] names = {"Jamila", "Alex", "Mariam"};
+        for (String name : names){
+            System.out.println(name);
+        }
+ */
+        //Ausgabe aller Namen im Array in der basic Variante
+ /*     String [] names = {"Jamila", "Alex", "Mariam"};
+        for (int i = 0; i < names.lenght; i++ ){
+            System.out.println(names[i]);
+        }
+*/
+        // Ausgabe aller Namen in der Liste mit forEach und Consumer d.h. mit Lambda
+        List<String> names = List.of("Jamila", "Alex", "Mariam");
+        Consumer<String> stringConsumer =
+                name -> System.out.println(name); // Consumer akzeptiert ein Argument, aber gibt keinen Wert aus (quais void)
+        //names.forEach(name -> System.out.println(name)); //quasi eine andere Schreibweise für den Stringconsumer so wie im Beispiel unten
+        names.forEach(stringConsumer);
 
 
 
