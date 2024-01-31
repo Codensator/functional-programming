@@ -1,6 +1,7 @@
 package com.amigoscode;
 
-import java.util.function.BiFunction;
+import java.util.List;
+import java.util.function.*;
 
 public class Main {
 
@@ -62,14 +63,16 @@ public class Main {
 /**     01.06 - forEach
  *      forEach mit Consumer
  */
-        //Ausgabe aller Namen im Array mit for-each-Schleife
- /*     String [] names = {"Jamila", "Alex", "Mariam"};
+
+ /*     //Ausgabe aller Namen im Array mit for-each-Schleife
+        String [] names = {"Jamila", "Alex", "Mariam"};
         for (String name : names){
             System.out.println(name);
         }
  */
-        //Ausgabe aller Namen im Array in der basic Variante
- /*     String [] names = {"Jamila", "Alex", "Mariam"};
+
+ /*     //Ausgabe aller Namen im Array in der basic Variante
+        String [] names = {"Jamila", "Alex", "Mariam"};
         for (int i = 0; i < names.length; i++ ){
             System.out.println(names[i]);
         }
@@ -127,10 +130,63 @@ public class Main {
 /**     02.04 - BiConsumer
  *
  */
+/*
         Person jamila = personMapperFunc.apply("Jamila", 18);
+
         System.out.println(jamila);
+*/
+/**     02.05 - Consumer
+ *      In diesem Beispiel akzeptiert der Consumer den String und führt eine function aus, ohne eine object auszugeben.
+ */
+/*
+        sendEmailConsumer.accept("jamila@amigoscode.com");
+        //OOP-Variante von function darüber
+        //sendEmail("hello@amigoscode.com");
 
+        List<String> emails = List.of(
+                "hello@amigoscode.com",
+                "foo@amigoscode.com",
+                "bar@amigoscode.com"
+        );
 
+        emails.forEach(email -> sendEmail(email));
+
+        //emails.forEach(Main::sendEmail); //alternative Schreibweise zu oben, aber da Main verwendet wird, für mich erstmal nicht intuitiv
+*/
+/**     02.06 - Exercise
+ *      In dieser Aufgabe soll der Code von 02.05 - Consumer so angepasst werden, dass eine Absender- und eine Empfänger-E-Mail als String akzeptiert wird
+ */
+ /*       sendEmailBiConsumer.accept("hello@amigoscode.com", "alexu@gmail.com");
+*/
+
+/**
+ * 02.08 - Predicate and BiPredicates
+ * Predicate ist quasi ein boolean nur als function
+ * es können BiPredicates gebildet werden, indem predicate-functions mit .and ect. verknüpft werden
+ */
+/*
+
+        String email = "hello@amigoscode.com";
+        //OOP-Variante
+        //System.out.println(isValidEmail(email));
+        //function
+        //System.out.println(isValidEmailPredicate.test(email));
+        //kombinierte beide functions durch .and und bildet ein BiPredicate
+        boolean test =
+                isValidEmailPredicate
+                        .and(containsDotPredicate) //mehrere predicates können mit .and, .or .negate etc. wie mit boolschen Operatoren verknüpft werden
+                        .test(email);
+
+        System.out.println(test);
+*/
+
+/** 02.09 - Supplier
+ * Supplier akzeptiert kein Argument, aber gibt eines aus
+ * Supplier hat anders als andere functions, nur eine einzige (abstrakte) Methode: .get()
+ */
+
+/*        System.out.println(getUrlSupplier.get()); //.get ist notwendig, getUrlSupplier Supplier
+ */
     } // END OF public static void main(String[] args)
 
 /**     02.02 - Function
@@ -149,7 +205,7 @@ public class Main {
 /**     02.04 - BiConsumer
  *
  */
-
+/*
     record Person(String name, int Age){}
     static BiFunction<String, Integer, Person> personMapperFunc = Person::new;   //BiConsumer akzeptiert die ersten zwei Argumente und gibt den dritten aus
     //Oben ist effizientere Alternative zu unten
@@ -159,7 +215,7 @@ public class Main {
     static Person PersonMapperMeth(String name, int age){
         return new Person(name, age);
     }
-
+*/
 /**     02.03 - Chaining Functions
  *
  */
@@ -168,4 +224,65 @@ public class Main {
             n -> n * 2;
 */
 
+/**     02.05 - Consumer
+ *
+ */
+/*
+    static Consumer<String> sendEmailConsumer =
+            email -> System.out.println("Sending E-Mail to " + email);
+
+    //OOP-Variante von function darüber
+    static void sendEmail(String email){
+        System.out.println("Sending E-Mail to " + email);
+    }
+*/
+/**     02.06 - Exercise
+ *      In dieser Aufgabe soll die untenstehende Methode in analogie zu 02.05 - Consumer in eine function umgeformt werden
+ */
+/*
+    static void sendEmail(String from, String to) {
+        System.out.println("Sending from " + from + " email to " + to);
+    }
+
+    static BiConsumer<String, String> sendEmailBiConsumer =
+            (from, to) ->
+                    System.out.println("Sending from " + from + " email to " + to);
+*/
+
+/**
+ * 02.08 - Predicate and BiPredicates
+ */
+/*
+    //überprüft, ob ein "@" im Eingabe-String ist
+    static Predicate<String> isValidEmailPredicate =
+        email -> email.contains("@");
+
+    //überprüft, ob ein "." im Eingabe-String ist
+    static Predicate<String> containsDotPredicate =
+            email -> email.contains(".");
+
+    //OOP-Variante der function isValidEmailPredicate
+    static boolean isValidEmail(String email){
+        return email.contains("@");
+    }
+*/
+
+/** 02.09 - Supplier
+ *
+ */
+/*
+    static Supplier<String> getUrlSupplier =
+        () -> "https://app.amigoscode.com/";
+
+    static Supplier<List<String>> getUrlListSupplier =
+            () -> List.of("https://app.amigoscode.com/",
+                          "https://www.google.com/");
+    // Es ist auch möglich innerhalb des Suppliers basic logic anzuwenden, z.B. um die URL abzurufen oder zu erzeugen.
+    // dass könnte z.B. so aussehen: () -> { logic... return List.of(...)}
+
+    //OOP-Variante der function
+    static String getURL(){
+        return "https://app.amigoscode.com/";
+    }
+*/
 } //END OF public class Main
