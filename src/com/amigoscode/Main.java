@@ -187,7 +187,27 @@ public class Main {
 
 /*        System.out.println(getUrlSupplier.get()); //.get ist notwendig, getUrlSupplier Supplier
  */
-    } // END OF public static void main(String[] args)
+
+
+/** 03.01 - Extending Functional Interfaces
+ * functional interfaces können in Klassen definiert und in Main wiederverwendet werden.
+ */
+
+        EmailValidator EmailValidator = new EmailValidator();
+        List<String> emails = List.of(
+                "hello@gmail.com",
+                "hellogmail.com"
+        );
+
+        //Um EmailValidator aufzurufen und auf die Liste anzuwenden, ist die untere function notwendig
+        //mails ist eine List. Auf Lists kann man forEach() anwenden. forEach() ist ein Consumer
+
+        emails.forEach(email -> {
+            boolean isValid = EmailValidator.apply(email);
+            System.out.println(email + " is valid: " + isValid);
+        });
+
+    } // # # # # # # # # # # # END OF public static void main(String[] args) # # # # # # # # # #
 
 /**     02.02 - Function
  *
@@ -285,4 +305,4 @@ public class Main {
         return "https://app.amigoscode.com/";
     }
 */
-} //END OF public class Main
+} //# # # # # # # # # # # END OF public class Main # # # # # # # # # # #
