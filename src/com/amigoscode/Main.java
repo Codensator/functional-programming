@@ -192,7 +192,7 @@ public class Main {
 /** 03.01 - Extending Functional Interfaces
  * functional interfaces können in Klassen definiert und in Main wiederverwendet werden.
  */
-
+/*
         EmailValidator EmailValidator = new EmailValidator();
         List<String> emails = List.of(
                 "hello@gmail.com",
@@ -206,6 +206,38 @@ public class Main {
             boolean isValid = EmailValidator.apply(email);
             System.out.println(email + " is valid: " + isValid);
         });
+*/
+
+/** 03.03 - Using Combinator Pattern
+ *
+ */
+/*
+        Person jamila =  new Person(
+                "Jamila",
+                "+0000000",
+                "jamila@gmail.com"
+        );
+
+        Person alex =  new Person(
+                "Alex",
+                "0000000",
+                "alex@gmail.com"
+        );
+
+        PersonRegistrationValidator validator = PersonRegistrationValidator
+                .isEmailTaken()
+                .other(PersonRegistrationValidator.isEmailValid())
+                .other(PersonRegistrationValidator.isPhoneNumberValid());
+
+        PersonRegistrationValidator.ValidationResult result = validator.apply(jamila);
+
+        //if(result != PersonRegistrationValidator.ValidationResult.SUCCES){} // hier könnte man noch ein error handling einbauen
+
+        //Obwohl ich den Code 1 zu 1 kopiert habe, kommt beim souten etwas anderes raus als es sollte
+        System.out.println(validator.apply(jamila));
+        System.out.println(validator.apply(alex));
+*/
+
 
     } // # # # # # # # # # # # END OF public static void main(String[] args) # # # # # # # # # #
 
