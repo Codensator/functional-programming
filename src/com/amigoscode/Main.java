@@ -238,7 +238,18 @@ public class Main {
         System.out.println(validator.apply(alex));
 */
 
+/** 04.01 - Callbacks in Java
+ *
+ */
+/*
+       //Die Variante, die bei Callbacks häufiger eingesetzt wird
+        hello("Alex","Jones", input -> {
+            System.out.println(input + " you must have a last name");
+        });
 
+        //Variante mit der für den Callback auf den vordefinierten Methodenaufruf zurückgegriffen wird
+        //hello("Alex","Jones", cb);
+*/
     } // # # # # # # # # # # # END OF public static void main(String[] args) # # # # # # # # # #
 
 /**     02.02 - Function
@@ -337,4 +348,24 @@ public class Main {
         return "https://app.amigoscode.com/";
     }
 */
+
+/** 04.01 - Callbacks in Java
+ *
+ */
+/*
+    static Consumer<String> cb = input -> System.out.println(input + " you must have last name");
+
+
+    static void hello(String firstName,
+                      String lastName,
+                      Consumer<String> callback){
+        System.out.println(firstName);
+        if (lastName != null){
+            System.out.println(lastName);
+        } else {
+            callback.accept(firstName);
+        }
+    }
+*/
+
 } //# # # # # # # # # # # END OF public class Main # # # # # # # # # # #
